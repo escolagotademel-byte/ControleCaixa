@@ -8,51 +8,39 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-  <section id="loginTela" class="login-tela">
-    <div class="login-card">
-      <div class="login-logo">💰</div>
-      <h1>Controle de Caixa</h1>
-      <p>Acesso interno</p>
-      <label>Usuário</label>
-      <input id="loginUsuario" type="text" placeholder="Digite o usuário" autocomplete="username" />
-      <label>Senha</label>
-      <input id="loginSenha" type="password" placeholder="Digite a senha" autocomplete="current-password" />
-      <button id="btnLogin">Entrar</button>
-      <p id="loginErro" class="login-erro"></p>
+  <aside class="sidebar">
+    <div class="brand">💰 Caixa</div>
+    <button class="nav active" data-page="dashboard">🏠 Dashboard</button>
+    <button class="nav" data-page="entradas">➕ Entradas</button>
+    <button class="nav" data-page="saidas">➖ Saídas</button>
+    <button class="nav" data-page="recorrencias">🔄 Recorrências</button>
+    <button class="nav" data-page="previsao">📅 Fluxo Previsto</button>
+    <button class="nav" data-page="relatorios">📄 Relatórios</button>
+    <button class="nav" data-page="configuracoes">⚙️ Configurações</button>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1 id="pageTitle">Controle de Caixa</h1>
+        <p id="pageSubtitle">Sistema financeiro interno</p>
+      </div>
+      <span id="statusConexao" class="status">Conectando...</span>
     </div>
-  </section>
 
-  <div id="sistema" class="app oculto">
-    <aside class="sidebar">
-      <div class="brand">💰 <span>Caixa</span></div>
-      <nav>
-        <button class="nav-item ativo" data-page="dashboard">🏠 Dashboard</button>
-        <button class="nav-item" data-page="entradas">➕ Entradas</button>
-        <button class="nav-item" data-page="saidas">➖ Saídas</button>
-        <button class="nav-item" data-page="recorrencias">🔄 Recorrências</button>
-        <button class="nav-item" data-page="previsao">📅 Fluxo Previsto</button>
-        <button class="nav-item" data-page="relatorios">📄 Relatórios</button>
-        <button class="nav-item" data-page="configuracoes">⚙️ Configurações</button>
-      </nav>
-    </aside>
+    <section id="app"></section>
+  </main>
 
-    <main class="main">
-      <header class="topbar">
-        <div>
-          <h1 id="tituloPagina">Controle de Caixa</h1>
-          <p id="subtituloPagina">Resumo financeiro</p>
-        </div>
-        <div class="topbar-actions">
-          <span id="statusNuvem" class="status">Conectando...</span>
-          <button class="btn secundario" id="btnSair">Sair</button>
-        </div>
-      </header>
-
-      <section id="conteudo"></section>
-    </main>
-  </div>
-
-  <div id="toast" class="toast oculto"></div>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/entradas.js"></script>
+  <script src="js/saidas.js"></script>
+  <script src="js/recorrencias.js"></script>
+  <script src="js/previsao.js"></script>
+  <script src="js/relatorios.js"></script>
+  <script src="js/configuracoes.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

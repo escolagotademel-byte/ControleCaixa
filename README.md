@@ -1,22 +1,22 @@
-# Controle de Caixa v3.0
+# Controle de Caixa - Versão Supabase
 
-Sistema interno com login simples e Supabase.
+## Como abrir
+1. Abra a pasta no VS Code.
+2. Clique com o botão direito em `index.html`.
+3. Clique em **Open with Live Server**.
 
-## Login
+## Onde os dados ficam
+Os dados ficam no Supabase, nas tabelas:
+- entradas
+- saidas
+- recorrencias
+- configuracoes
 
-- Usuário: `adm`
-- Senha: `r4w2e3q1`
+## Usar em outro computador
+Copie esta pasta para o outro computador e abra com Live Server. Os dados serão os mesmos, pois estão na nuvem.
 
-## Como publicar no GitHub Pages
+## Segurança
+Esta versão usa a Publishable Key do Supabase. As tabelas precisam estar com RLS e políticas configuradas. Para uso definitivo, recomenda-se adicionar login.
 
-1. Extraia este ZIP.
-2. Envie todos os arquivos para a raiz do repositório `ControleCaixa`.
-3. Confirme o commit.
-4. Aguarde o GitHub Pages atualizar.
-5. Abra: `https://escolagotademel-byte.github.io/ControleCaixa/`
-
-## Observações
-
-- O login é simples, feito no JavaScript, apenas para evitar acesso casual.
-- Os dados são salvos no Supabase.
-- A sessão dura enquanto a aba do navegador estiver aberta.
+## Backup
+Vá em Configurações > Exportar backup.
