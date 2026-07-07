@@ -1,19 +1,22 @@
-# Controle de Caixa - versão 2.2
+# Controle de Caixa v3.0
 
-Versão corrigida com login simples antes do sistema.
+Sistema interno com login simples e Supabase.
 
 ## Login
 
-- Usuário: adm
-- Senha: r4w2e3q1
+- Usuário: `adm`
+- Senha: `r4w2e3q1`
 
-## Publicação no GitHub Pages
+## Como publicar no GitHub Pages
 
-Envie o conteúdo desta pasta para a raiz do repositório `ControleCaixa`.
-O arquivo `index.html` deve ficar na primeira tela do repositório, junto com as pastas `css` e `js`.
+1. Extraia este ZIP.
+2. Envie todos os arquivos para a raiz do repositório `ControleCaixa`.
+3. Confirme o commit.
+4. Aguarde o GitHub Pages atualizar.
+5. Abra: `https://escolagotademel-byte.github.io/ControleCaixa/`
 
 ## Observações
 
-- Esta versão usa Supabase para salvar dados na nuvem.
-- O botão Sair fica no canto superior direito após o login.
-- O login simples fica no código e serve apenas como bloqueio casual de acesso.
+- O login é simples, feito no JavaScript, apenas para evitar acesso casual.
+- Os dados são salvos no Supabase.
+- A sessão dura enquanto a aba do navegador estiver aberta.
