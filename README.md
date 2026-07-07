@@ -20,3 +20,11 @@ Esta versão usa a Publishable Key do Supabase. As tabelas precisam estar com RL
 
 ## Backup
 Vá em Configurações > Exportar backup.
+
+## Login simples
+
+Usuário: `adm`
+
+Senha: `r4w2e3q1`
+
+O login fica ativo somente enquanto a aba do navegador estiver aberta. Ao fechar e abrir novamente, será necessário entrar de novo.

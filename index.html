@@ -8,6 +8,24 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
+  <section id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="login-logo">💰</div>
+      <h1>Controle de Caixa</h1>
+      <p>Acesso interno</p>
+
+      <label>Usuário</label>
+      <input type="text" id="loginUsuario" autocomplete="username" placeholder="Digite o usuário" />
+
+      <label>Senha</label>
+      <input type="password" id="loginSenha" autocomplete="current-password" placeholder="Digite a senha" />
+
+      <button id="btnLogin" class="btn-login">Entrar</button>
+      <div id="loginErro" class="login-erro"></div>
+    </div>
+  </section>
+
+  <div id="appShell" class="app-shell bloqueado">
   <aside class="sidebar">
     <div class="brand">💰 Caixa</div>
     <button class="nav active" data-page="dashboard">🏠 Dashboard</button>
@@ -25,11 +43,15 @@
         <h1 id="pageTitle">Controle de Caixa</h1>
         <p id="pageSubtitle">Sistema financeiro interno</p>
       </div>
-      <span id="statusConexao" class="status">Conectando...</span>
+      <div class="top-actions">
+        <span id="statusConexao" class="status">Conectando...</span>
+        <button id="btnSair" class="btn-sair">Sair</button>
+      </div>
     </div>
 
     <section id="app"></section>
   </main>
+  </div>
 
   <script src="js/config.js"></script>
   <script src="js/utils.js"></script>
