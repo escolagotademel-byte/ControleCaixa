@@ -1,30 +1,19 @@
-# Controle de Caixa - Versão Supabase
+# Controle de Caixa - versão 2.2
 
-## Como abrir
-1. Abra a pasta no VS Code.
-2. Clique com o botão direito em `index.html`.
-3. Clique em **Open with Live Server**.
+Versão corrigida com login simples antes do sistema.
 
-## Onde os dados ficam
-Os dados ficam no Supabase, nas tabelas:
-- entradas
-- saidas
-- recorrencias
-- configuracoes
+## Login
 
-## Usar em outro computador
-Copie esta pasta para o outro computador e abra com Live Server. Os dados serão os mesmos, pois estão na nuvem.
+- Usuário: adm
+- Senha: r4w2e3q1
 
-## Segurança
-Esta versão usa a Publishable Key do Supabase. As tabelas precisam estar com RLS e políticas configuradas. Para uso definitivo, recomenda-se adicionar login.
+## Publicação no GitHub Pages
 
-## Backup
-Vá em Configurações > Exportar backup.
+Envie o conteúdo desta pasta para a raiz do repositório `ControleCaixa`.
+O arquivo `index.html` deve ficar na primeira tela do repositório, junto com as pastas `css` e `js`.
 
-## Login simples
+## Observações
 
-Usuário: `adm`
-
-Senha: `r4w2e3q1`
-
-O login fica ativo somente enquanto a aba do navegador estiver aberta. Ao fechar e abrir novamente, será necessário entrar de novo.
+- Esta versão usa Supabase para salvar dados na nuvem.
+- O botão Sair fica no canto superior direito após o login.
+- O login simples fica no código e serve apenas como bloqueio casual de acesso.
