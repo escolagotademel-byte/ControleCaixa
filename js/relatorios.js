@@ -444,6 +444,7 @@ async function gerarRelatorio() {
             totalEntradas - totalSaidas;
 
         resultado.innerHTML = `
+        
             <div class="cards">
 
                 <div class="card azul">
@@ -531,6 +532,41 @@ async function gerarRelatorio() {
             }
         `;
 
+        const hojeEmissao = new Date();
+
+const dataEmissao = hojeEmissao.toLocaleDateString(
+    "pt-BR"
+);
+
+const periodoInicialFormatado =
+    dataInicial
+        ? dataBR(dataInicial)
+        : "Início";
+
+const periodoFinalFormatado =
+    dataFinal
+        ? dataBR(dataFinal)
+        : "Fim";
+
+document.getElementById(
+    "cabecalhoImpressao"
+).innerHTML = `
+    <h1>ESCOLA GOTA DE MEL</h1>
+
+    <h2>RELATÓRIO FINANCEIRO</h2>
+
+    <p>
+        <strong>Período:</strong>
+        ${periodoInicialFormatado}
+        a
+        ${periodoFinalFormatado}
+    </p>
+
+    <p>
+        <strong>Data de emissão:</strong>
+        ${dataEmissao}
+    </p>
+`;
     } catch (erro) {
         console.error(
             "Erro ao gerar relatório:",
