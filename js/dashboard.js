@@ -1,56 +1,159 @@
 async function renderDashboard() {
-    setTitulo('Controle de Caixa', 'Resumo financeiro da escola');
+    setTitulo(
+        "Controle de Caixa",
+        "Resumo financeiro da escola"
+    );
 
     const hoje = new Date();
     const anoAtual = hoje.getFullYear();
     const mesAtual = hoje.getMonth();
 
-    const [entradas, saidas, recorrencias, saldoInicialRaw] = await Promise.all([
-        buscar('entradas'),
-        buscar('saidas'),
-        buscar('recorrencias'),
-        buscarConfig('saldoInicial')
+    const [
+        entradas,
+        saidas,
+        recorrencias,
+        mensalidades,
+        saldoInicialRaw
+    ] = await Promise.all([
+        buscar("entradas"),
+        buscar("saidas"),
+        buscar("recorrencias"),
+        buscar("mensalidades"),
+        buscarConfig("saldoInicial")
     ]);
 
     const saldoInicial = Number(saldoInicialRaw || 0);
 
     function pertenceMesAtual(item) {
-        const data = new Date(item.data + 'T00:00:00');
-        return data.getFullYear() === anoAtual && data.getMonth() === mesAtual;
+        if (!item.data) {
+            return false;
+        }
+
+        const data = new Date(item.data + "T00:00:00");
+
+        return (
+            data.getFullYear() === anoAtual &&
+            data.getMonth() === mesAtual
+        );
     }
 
-    const entradasMes = entradas.filter(pertenceMesAtual);
-    const saidasMes = saidas.filter(pertenceMesAtual);
+    function mensalidadePagaNoMesAtual(item) {
+        if (
+            item.pago !== true ||
+            !item.data_pagamento
+        ) {
+            return false;
+        }
 
-    const recorrenciasAtivas = recorrencias.filter(r => r.ativo !== false);
+        const dataPagamento = new Date(
+            item.data_pagamento + "T00:00:00"
+        );
 
-    const entradasRecorrentesMes = recorrenciasAtivas
-        .filter(r => r.tipo === 'entrada')
-        .reduce((soma, item) => soma + Number(item.valor), 0);
+        return (
+            dataPagamento.getFullYear() === anoAtual &&
+            dataPagamento.getMonth() === mesAtual
+        );
+    }
 
-    const saidasRecorrentesMes = recorrenciasAtivas
-        .filter(r => r.tipo === 'saida')
-        .reduce((soma, item) => soma + Number(item.valor), 0);
+    const entradasMes = entradas.filter(
+        pertenceMesAtual
+    );
+
+    const saidasMes = saidas.filter(
+        pertenceMesAtual
+    );
+
+    const mensalidadesPagasMes = mensalidades.filter(
+        mensalidadePagaNoMesAtual
+    );
+
+    const recorrenciasAtivas = recorrencias.filter(
+        item => item.ativo !== false
+    );
+
+    const entradasRecorrentesMes =
+        recorrenciasAtivas
+            .filter(item => item.tipo === "entrada")
+            .reduce(
+                (soma, item) =>
+                    soma + Number(item.valor || 0),
+                0
+            );
+
+    const saidasRecorrentesMes =
+        recorrenciasAtivas
+            .filter(item => item.tipo === "saida")
+            .reduce(
+                (soma, item) =>
+                    soma + Number(item.valor || 0),
+                0
+            );
+
+    const totalMensalidadesPagas =
+        mensalidadesPagasMes.reduce(
+            (soma, item) =>
+                soma + Number(item.valor || 0),
+            0
+        );
+
+    const totalEntradasManuais =
+        entradasMes.reduce(
+            (soma, item) =>
+                soma + Number(item.valor || 0),
+            0
+        );
+
+    const totalSaidasManuais =
+        saidasMes.reduce(
+            (soma, item) =>
+                soma + Number(item.valor || 0),
+            0
+        );
 
     const totalEntradas =
-        entradasMes.reduce((soma, item) => soma + Number(item.valor), 0)
-        + entradasRecorrentesMes;
+        totalEntradasManuais +
+        entradasRecorrentesMes +
+        totalMensalidadesPagas;
 
     const totalSaidas =
-        saidasMes.reduce((soma, item) => soma + Number(item.valor), 0)
-        + saidasRecorrentesMes;
+        totalSaidasManuais +
+        saidasRecorrentesMes;
 
-    const saldo = saldoInicial + totalEntradas - totalSaidas;
+    const saldo =
+        saldoInicial +
+        totalEntradas -
+        totalSaidas;
+
+    const mensalidadesParaLista =
+        mensalidadesPagasMes.map(item => ({
+            id: item.id,
+            data: item.data_pagamento,
+            tipo: "Mensalidade",
+            descricao: `Mensalidade - ${item.aluno}`,
+            valor: Number(item.valor || 0)
+        }));
 
     const ultimos = [
-        ...entradasMes.map(e => ({ ...e, tipo: 'Entrada' })),
-        ...saidasMes.map(s => ({ ...s, tipo: 'Saída' }))
-    ]
-    .sort((a, b) => b.data.localeCompare(a.data))
-    .slice(0, 10);
+        ...entradasMes.map(item => ({
+            ...item,
+            tipo: "Entrada"
+        })),
 
-    document.getElementById('app').innerHTML = `
+        ...saidasMes.map(item => ({
+            ...item,
+            tipo: "Saída"
+        })),
+
+        ...mensalidadesParaLista
+    ]
+        .sort((a, b) =>
+            b.data.localeCompare(a.data)
+        )
+        .slice(0, 10);
+
+    document.getElementById("app").innerHTML = `
         <div class="cards">
+
             <div class="card verde">
                 <span>Saldo</span>
                 <strong>${moeda(saldo)}</strong>
@@ -67,29 +170,72 @@ async function renderDashboard() {
             </div>
 
             <div class="card vermelho">
-                <span>Saldo Inicial</span>
-                <strong>${moeda(saldoInicial)}</strong>
+                <span>Mensalidades pagas</span>
+                <strong>${moeda(totalMensalidadesPagas)}</strong>
             </div>
+
         </div>
 
         <div class="painel">
-            <h2>Resumo das recorrências do mês</h2>
+            <h2>Resumo das entradas do mês</h2>
 
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Tipo</th>
+                        <th>Origem</th>
                         <th>Total</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     <tr>
-                        <td>Entradas recorrentes</td>
-                        <td>${moeda(entradasRecorrentesMes)}</td>
+                        <td>Entradas manuais</td>
+                        <td>
+                            ${moeda(totalEntradasManuais)}
+                        </td>
                     </tr>
+
+                    <tr>
+                        <td>Entradas recorrentes</td>
+                        <td>
+                            ${moeda(entradasRecorrentesMes)}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Mensalidades pagas</td>
+                        <td>
+                            ${moeda(totalMensalidadesPagas)}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="painel">
+            <h2>Resumo das saídas do mês</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Origem</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Saídas manuais</td>
+                        <td>
+                            ${moeda(totalSaidasManuais)}
+                        </td>
+                    </tr>
+
                     <tr>
                         <td>Saídas recorrentes</td>
-                        <td>${moeda(saidasRecorrentesMes)}</td>
+                        <td>
+                            ${moeda(saidasRecorrentesMes)}
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -100,29 +246,47 @@ async function renderDashboard() {
 
             ${
                 ultimos.length
-                ? `
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Data</th>
-                                <th>Tipo</th>
-                                <th>Descrição</th>
-                                <th>Valor</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${ultimos.map(i => `
+                    ? `
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>${dataBR(i.data)}</td>
-                                    <td>${i.tipo}</td>
-                                    <td>${escapeHtml(i.descricao)}</td>
-                                    <td>${moeda(i.valor)}</td>
+                                    <th>Data</th>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                    <th>Valor</th>
                                 </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                `
-                : '<p class="msg">Nenhum lançamento manual cadastrado neste mês.</p>'
+                            </thead>
+
+                            <tbody>
+                                ${ultimos.map(item => `
+                                    <tr>
+                                        <td>
+                                            ${dataBR(item.data)}
+                                        </td>
+
+                                        <td>
+                                            ${item.tipo}
+                                        </td>
+
+                                        <td>
+                                            ${escapeHtml(
+                                                item.descricao
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            ${moeda(item.valor)}
+                                        </td>
+                                    </tr>
+                                `).join("")}
+                            </tbody>
+                        </table>
+                    `
+                    : `
+                        <p class="msg">
+                            Nenhum lançamento cadastrado neste mês.
+                        </p>
+                    `
             }
         </div>
     `;
