@@ -80,6 +80,176 @@
         display: block !important;
     }
 
+    /* Esconde o menu lateral e o topo do sistema */
+    .sidebar,
+    .topbar {
+        display: none !important;
+    }
+
+    /* Esconde filtros, campos e botões */
+    .toolbar,
+    .btn,
+    button,
+    input,
+    select {
+        display: none !important;
+    }
+
+    /* Faz o relatório ocupar toda a folha */
+    .main {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    #app {
+        width: 100% !important;
+    }
+
+    /* Esconde textos auxiliares da tela */
+    #app > .painel > .desc {
+        display: none !important;
+    }
+
+    /* Cabeçalho exclusivo para impressão */
+    .cabecalho-impressao {
+        display: block !important;
+        text-align: center;
+        margin-bottom: 22px;
+        padding-bottom: 14px;
+        border-bottom: 2px solid #000000;
+    }
+
+    .cabecalho-impressao h1 {
+        font-size: 22px;
+        margin-bottom: 6px;
+        color: #000000 !important;
+    }
+
+    .cabecalho-impressao h2 {
+        font-size: 17px;
+        margin-bottom: 8px;
+        color: #000000 !important;
+    }
+
+    .cabecalho-impressao p {
+        font-size: 12px;
+        margin: 3px 0;
+        color: #000000 !important;
+    }
+
+    /* Remove sombras e fundos dos painéis */
+    .painel {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 0 18px 0 !important;
+        background: #ffffff !important;
+    }
+
+    /* Cards de resumo */
+    .cards {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 8px !important;
+        margin-bottom: 18px !important;
+    }
+
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #999999 !important;
+        border-radius: 4px !important;
+        padding: 10px !important;
+        min-height: auto !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    .card span {
+        color: #000000 !important;
+        font-size: 11px !important;
+    }
+
+    .card strong {
+        display: block !important;
+        font-size: 15px !important;
+        margin-top: 5px !important;
+    }
+
+    /* Entradas em verde */
+    .card.azul strong {
+        color: #16a34a !important;
+    }
+
+    /* Saídas em vermelho */
+    .card.laranja strong {
+        color: #dc2626 !important;
+    }
+
+    /* Saldo em verde */
+    .card.verde strong {
+        color: #16a34a !important;
+    }
+
+    /* Mensalidades pagas em verde */
+    .card.vermelho strong {
+        color: #16a34a !important;
+    }
+
+    /* Tabelas */
+    .table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        font-size: 10px !important;
+    }
+
+    .table th,
+    .table td {
+        border: 1px solid #777777 !important;
+        padding: 6px !important;
+        color: #000000;
+        background: #ffffff !important;
+    }
+
+    .table th {
+        font-weight: bold !important;
+        background: #eeeeee !important;
+    }
+
+    /* Valores de entradas em verde */
+    .valor-pos {
+        color: #16a34a !important;
+        font-weight: bold !important;
+    }
+
+    /* Valores de saídas em vermelho */
+    .valor-neg {
+        color: #dc2626 !important;
+        font-weight: bold !important;
+    }
+
+    /* Evita cortar linhas ou cards entre páginas */
+    .table tr,
+    .card,
+    .painel {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+@media print {
+
+    @page {
+        size: A4;
+        margin: 15mm;
+    }
+
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        display: block !important;
+    }
+
     /* Esconder menu e cabeçalho do sistema */
     .sidebar,
     .topbar {
