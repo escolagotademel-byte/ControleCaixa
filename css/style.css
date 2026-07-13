@@ -176,6 +176,11 @@
         margin-top: 5px !important;
     }
 
+        /* Saldo em preto */
+    .card.verde strong {
+        color: #000000 !important;
+    }
+
     /* Entradas em verde */
     .card.azul strong {
         color: #16a34a !important;
@@ -186,14 +191,10 @@
         color: #dc2626 !important;
     }
 
-    /* Saldo em verde */
-    .card.verde strong {
-        color: #16a34a !important;
-    }
-
-    /* Mensalidades pagas em verde */
+    /* Mensalidades em azul */
     .card.vermelho strong {
-        color: #16a34a !important;
+        color: #2563eb !important;
+    
     }
 
     /* Tabelas */
