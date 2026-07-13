@@ -1,1 +1,61 @@
 *{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,Helvetica,sans-serif;background:#f4f6fb;color:#111827;display:flex;min-height:100vh}.sidebar{width:245px;background:#fff;padding:24px 18px;border-right:1px solid #e5e7eb;position:fixed;left:0;top:0;bottom:0}.brand{font-size:26px;font-weight:700;margin-bottom:28px}.nav{display:block;width:100%;text-align:left;background:transparent;border:0;padding:13px 14px;border-radius:12px;margin-bottom:8px;font-size:15px;color:#111827;cursor:pointer}.nav:hover{background:#f3f4f6}.nav.active{background:#2563eb;color:#fff;font-weight:700}.main{margin-left:245px;width:calc(100% - 245px);padding:28px}.topbar{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px}.topbar h1{font-size:30px}.topbar p{color:#6b7280;margin-top:5px}.status{font-size:13px;padding:8px 12px;border-radius:999px;background:#e5e7eb;color:#374151}.status.ok{background:#dcfce7;color:#166534}.status.erro{background:#fee2e2;color:#991b1b}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:22px}.card{border-radius:20px;padding:24px;color:#fff;box-shadow:0 12px 24px rgba(0,0,0,.10)}.card span{font-size:15px}.card strong{display:block;font-size:30px;margin-top:22px}.verde{background:#10b981}.azul{background:#0ea5e9}.laranja{background:#fb923c}.vermelho{background:#ef4444}.painel{background:#fff;border-radius:18px;padding:22px;box-shadow:0 8px 20px rgba(0,0,0,.06);margin-bottom:18px}.painel h2{margin-bottom:6px}.painel p.desc{color:#6b7280;margin-bottom:18px}.toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap}.toolbar input,.toolbar select{padding:11px;border:1px solid #d1d5db;border-radius:10px;min-width:200px}.btn{border:0;border-radius:10px;padding:11px 15px;background:#111827;color:#fff;cursor:pointer;font-weight:700}.btn.sec{background:#e5e7eb;color:#111827}.btn.blue{background:#2563eb}.btn.red{background:#dc2626}.btn.green{background:#16a34a}.form{display:grid;grid-template-columns:1fr 2fr 1fr auto;gap:12px;align-items:end;background:#f9fafb;padding:16px;border-radius:15px;margin-bottom:18px}.form.rec{grid-template-columns:130px 2fr 1fr 100px 110px auto}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field input,.field select{width:100%;padding:11px;border:1px solid #d1d5db;border-radius:10px}.table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden}.table th{background:#f3f4f6;text-align:left;font-size:14px;padding:13px}.table td{padding:13px;border-bottom:1px solid #e5e7eb}.actions{display:flex;gap:7px}.msg{padding:14px;background:#f9fafb;border-radius:12px;color:#6b7280}.mes-card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;margin-bottom:12px;overflow:hidden}.mes-head{padding:16px;display:grid;grid-template-columns:1fr repeat(3,170px);gap:12px;align-items:center;cursor:pointer}.mes-head h3{font-size:18px}.mes-head small{display:block;color:#6b7280;margin-bottom:4px}.mes-detalhes{display:none;padding:0 16px 16px}.mes-card.aberto .mes-detalhes{display:block}.valor-pos{color:#16a34a;font-weight:700}.valor-neg{color:#dc2626;font-weight:700}.lancamento{display:flex;justify-content:space-between;padding:11px;border-top:1px solid #e5e7eb}.relatorio-linha{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e5e7eb}.config-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.aviso{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:14px;border-radius:12px;margin-bottom:14px}@media(max-width:1050px){.cards{grid-template-columns:repeat(2,1fr)}.form,.form.rec{grid-template-columns:1fr}.mes-head{grid-template-columns:1fr}.sidebar{position:relative;width:100%;height:auto}.main{margin-left:0;width:100%}body{display:block}}
+@media print {
+
+    body {
+        background: white !important;
+    }
+
+    /* Esconde o menu lateral */
+    .sidebar {
+        display: none !important;
+    }
+
+    /* Esconde o topo */
+    .topbar {
+        display: none !important;
+    }
+
+    /* Ocupa toda a largura */
+    .main {
+        margin: 0 !important;
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    /* Esconde botões e filtros */
+    .toolbar,
+    .btn,
+    input,
+    select {
+        display: none !important;
+    }
+
+    /* Remove sombras */
+    .painel,
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #ccc;
+    }
+
+    /* Mostra apenas o relatório */
+    #resultadoRelatorio {
+        display: block !important;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid #999;
+        padding: 8px;
+    }
+
+    h1,
+    h2,
+    h3 {
+        color: black !important;
+    }
+}
