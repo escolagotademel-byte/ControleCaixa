@@ -70,7 +70,9 @@ async function renderRelatorios() {
 
             </div>
 
-            <div id="resultadoRelatorio"></div>
+            <div id="cabecalhoImpressao" class="cabecalho-impressao"></div>
+
+<div id="resultadoRelatorio"></div>
 
         </div>
     `;
