@@ -235,6 +235,25 @@
         break-inside: avoid;
         page-break-inside: avoid;
     }
+        /* Valores individuais da tabela na impressão */
+
+    .table td.valor-pos,
+    .table td.valor-pos strong,
+    .table .valor-pos {
+        color: #16a34a !important;
+        font-weight: 700 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .table td.valor-neg,
+    .table td.valor-neg strong,
+    .table .valor-neg {
+        color: #dc2626 !important;
+        font-weight: 700 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
 }
 
 @media print {
