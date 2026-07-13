@@ -59,3 +59,155 @@
         color: black !important;
     }
 }
+/* =========================
+   IMPRESSÃO DE RELATÓRIOS
+========================= */
+
+.cabecalho-impressao {
+    display: none;
+}
+
+@media print {
+
+    @page {
+        size: A4;
+        margin: 15mm;
+    }
+
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        display: block !important;
+    }
+
+    /* Esconder menu e cabeçalho do sistema */
+    .sidebar,
+    .topbar {
+        display: none !important;
+    }
+
+    /* Esconder filtros e botões */
+    .toolbar,
+    .btn,
+    button,
+    input,
+    select {
+        display: none !important;
+    }
+
+    /* Usar toda a folha */
+    .main {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    #app {
+        width: 100% !important;
+    }
+
+    /* Esconder elementos que não fazem parte do relatório */
+    #app > .painel > .desc {
+        display: none !important;
+    }
+
+    /* Mostrar o cabeçalho próprio */
+    .cabecalho-impressao {
+        display: block !important;
+        text-align: center;
+        margin-bottom: 22px;
+        padding-bottom: 14px;
+        border-bottom: 2px solid #000000;
+    }
+
+    .cabecalho-impressao h1 {
+        font-size: 22px;
+        margin-bottom: 6px;
+        color: #000000 !important;
+    }
+
+    .cabecalho-impressao h2 {
+        font-size: 17px;
+        margin-bottom: 8px;
+        color: #000000 !important;
+    }
+
+    .cabecalho-impressao p {
+        font-size: 12px;
+        margin: 3px 0;
+        color: #000000 !important;
+    }
+
+    /* Remover aparência de cards da tela */
+    .painel {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: #ffffff !important;
+    }
+
+    .cards {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 8px !important;
+        margin-bottom: 18px !important;
+    }
+
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #999999 !important;
+        border-radius: 4px !important;
+        padding: 10px !important;
+        min-height: auto !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    .card span,
+    .card strong {
+        color: #000000 !important;
+    }
+
+    .card span {
+        font-size: 11px !important;
+    }
+
+    .card strong {
+        font-size: 15px !important;
+        margin-top: 5px !important;
+    }
+
+    /* Tabelas */
+    .table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        font-size: 10px !important;
+    }
+
+    .table th,
+    .table td {
+        border: 1px solid #777777 !important;
+        padding: 6px !important;
+        color: #000000 !important;
+        background: #ffffff !important;
+    }
+
+    .table th {
+        font-weight: bold !important;
+        background: #eeeeee !important;
+    }
+
+    .valor-pos,
+    .valor-neg {
+        color: #000000 !important;
+    }
+
+    /* Evita cortar linhas no meio */
+    .table tr,
+    .card,
+    .painel {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
