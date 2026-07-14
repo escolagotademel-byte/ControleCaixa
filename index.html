@@ -3,33 +3,111 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Controle de Caixa</title>
+
   <link rel="stylesheet" href="css/style.css" />
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body>
+
   <aside class="sidebar">
+
     <div class="brand">💰 Caixa</div>
-    <button class="nav active" data-page="dashboard">🏠 Dashboard</button>
-    <button class="nav" data-page="entradas">➕ Entradas</button>
-   <button class="nav" data-page="saidas">➖ Saídas</button>
-<button class="nav" data-page="mensalidades">🎓 Mensalidades</button>
-<button class="nav" data-page="recorrencias">🔄 Recorrências</button>
-    <button class="nav" data-page="previsao">📅 Fluxo Previsto</button>
-    <button class="nav" data-page="relatorios">📄 Relatórios</button>
-    <button class="nav" data-page="configuracoes">⚙️ Configurações</button>
+
+    <button
+      id="btnMenuInferior"
+      class="nav nav-menu-mobile"
+      type="button"
+    >
+      ☰ Menu
+    </button>
+
+    <button
+      class="nav nav-opcao active"
+      data-page="dashboard"
+      type="button"
+    >
+      🏠 Dashboard
+    </button>
+
+    <button
+      class="nav nav-opcao"
+      data-page="entradas"
+      type="button"
+    >
+      ➕ Entradas
+    </button>
+
+    <button
+      class="nav nav-opcao"
+      data-page="saidas"
+      type="button"
+    >
+      ➖ Saídas
+    </button>
+
+    <button
+      class="nav nav-opcao"
+      data-page="mensalidades"
+      type="button"
+    >
+      🎓 Mensalidades
+    </button>
+
+    <button
+      class="nav nav-opcao"
+      data-page="recorrencias"
+      type="button"
+    >
+      🔄 Recorrências
+    </button>
+
+    <button
+      class="nav nav-opcao"
+      data-page="previsao"
+      type="button"
+    >
+      📅 Fluxo Previsto
+    </button>
+
+    <button
+      class="nav nav-opcao"
+      data-page="relatorios"
+      type="button"
+    >
+      📄 Relatórios
+    </button>
+
+    <button
+      class="nav nav-opcao"
+      data-page="configuracoes"
+      type="button"
+    >
+      ⚙️ Configurações
+    </button>
+
   </aside>
 
   <main class="main">
+
     <div class="topbar">
+
       <div>
         <h1 id="pageTitle">Controle de Caixa</h1>
         <p id="pageSubtitle">Sistema financeiro interno</p>
       </div>
-      <span id="statusConexao" class="status">Conectando...</span>
+
+      <span id="statusConexao" class="status">
+        Conectando...
+      </span>
+
     </div>
 
     <section id="app"></section>
+
   </main>
 
   <script src="js/config.js"></script>
@@ -38,11 +116,12 @@
   <script src="js/dashboard.js"></script>
   <script src="js/entradas.js"></script>
   <script src="js/saidas.js"></script>
-<script src="js/mensalidades.js"></script>
-<script src="js/recorrencias.js"></script>
+  <script src="js/mensalidades.js"></script>
+  <script src="js/recorrencias.js"></script>
   <script src="js/previsao.js"></script>
   <script src="js/relatorios.js"></script>
   <script src="js/configuracoes.js"></script>
   <script src="js/app.js"></script>
+
 </body>
 </html>
