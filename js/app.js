@@ -1,30 +1,62 @@
 let paginaAtual = 'dashboard';
 
-document.addEventListener(
-    'DOMContentLoaded',
-    async () => {
-        document
-            .querySelectorAll('.nav')
-            .forEach(btn => {
-                btn.addEventListener(
-                    'click',
-                    () => navegar(btn.dataset.page)
-                );
-            });
+document.addEventListener('DOMContentLoaded', async () => {
+    const menu = document.querySelector('.sidebar');
+    const botaoMenuInferior = document.getElementById('btnMenuInferior');
 
-        await testarConexao();
-        navegar('dashboard');
+    if (botaoMenuInferior && menu) {
+        botaoMenuInferior.addEventListener('click', evento => {
+            evento.preventDefault();
+            evento.stopPropagation();
+
+            menu.classList.toggle('menu-aberto');
+        });
     }
-);
+
+    if (menu) {
+        menu.addEventListener('click', async evento => {
+            const botao = evento.target.closest('[data-page]');
+
+            if (!botao) {
+                return;
+            }
+
+            evento.preventDefault();
+
+            const pagina = botao.dataset.page;
+
+            if (!pagina) {
+                return;
+            }
+
+            await navegar(pagina);
+
+            if (window.innerWidth <= 768) {
+                menu.classList.remove('menu-aberto');
+            }
+        });
+    }
+
+    await testarConexao();
+    await navegar('dashboard');
+});
 
 function setTitulo(titulo, subtitulo) {
-    document.getElementById('pageTitle').textContent = titulo;
-    document.getElementById('pageSubtitle').textContent = subtitulo || '';
+    const tituloElemento = document.getElementById('pageTitle');
+    const subtituloElemento = document.getElementById('pageSubtitle');
+
+    if (tituloElemento) {
+        tituloElemento.textContent = titulo;
+    }
+
+    if (subtituloElemento) {
+        subtituloElemento.textContent = subtitulo || '';
+    }
 }
 
 function setActive(page) {
     document
-        .querySelectorAll('.nav')
+        .querySelectorAll('[data-page]')
         .forEach(botao => {
             botao.classList.toggle(
                 'active',
@@ -39,6 +71,11 @@ async function navegar(page) {
 
     const app = document.getElementById('app');
 
+    if (!app) {
+        console.error('Área principal do sistema não encontrada.');
+        return;
+    }
+
     app.innerHTML = `
         <div class="painel">
             <p class="msg">Carregando...</p>
@@ -46,36 +83,49 @@ async function navegar(page) {
     `;
 
     try {
-        if (page === 'dashboard') {
-            await renderDashboard();
+        switch (page) {
+            case 'dashboard':
+                await renderDashboard();
+                break;
+
+            case 'entradas':
+                await renderEntradas();
+                break;
+
+            case 'saidas':
+                await renderSaidas();
+                break;
+
+            case 'mensalidades':
+                await renderMensalidades();
+                break;
+
+            case 'recorrencias':
+                await renderRecorrencias();
+                break;
+
+            case 'previsao':
+                await renderPrevisao();
+                break;
+
+            case 'relatorios':
+                await renderRelatorios();
+                break;
+
+            case 'configuracoes':
+                await renderConfiguracoes();
+                break;
+
+            default:
+                await renderDashboard();
+                break;
         }
 
-        if (page === 'entradas') {
-            await renderEntradas();
-        }
-
-        if (page === 'saidas') {
-            await renderSaidas();
-        }
-
-        if (page === 'mensalidades') {
-            await renderMensalidades();
-        }
-
-        if (page === 'recorrencias') {
-            await renderRecorrencias();
-        }
-
-        if (page === 'previsao') {
-            await renderPrevisao();
-        }
-
-        if (page === 'relatorios') {
-            await renderRelatorios();
-        }
-
-        if (page === 'configuracoes') {
-            await renderConfiguracoes();
+        if (window.innerWidth <= 768) {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
     } catch (erro) {
         console.error(erro);
@@ -83,7 +133,10 @@ async function navegar(page) {
         app.innerHTML = `
             <div class="painel">
                 <p class="msg">
-                    Erro: ${escapeHtml(erro.message)}
+                    Erro: ${escapeHtml(
+                        erro?.message ||
+                        'Não foi possível abrir esta página.'
+                    )}
                 </p>
             </div>
         `;
