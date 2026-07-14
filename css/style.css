@@ -401,3 +401,358 @@
         page-break-inside: avoid;
     }
 }
+/* ==================================================
+   DASHBOARD 2.0 — ESCOLA
+================================================== */
+
+.dashboard-v2 {
+    display: grid;
+    gap: 18px;
+}
+
+.saldo-destaque {
+    padding: 30px;
+    border-radius: 26px;
+    background: linear-gradient(135deg, #111827, #2563eb);
+    color: #ffffff;
+    box-shadow: 0 18px 35px rgba(37, 99, 235, 0.20);
+}
+
+.saldo-destaque.saldo-negativo {
+    background: linear-gradient(135deg, #7f1d1d, #dc2626);
+}
+
+.saldo-destaque > span {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 15px;
+    opacity: 0.90;
+}
+
+.saldo-destaque > strong {
+    display: block;
+    font-size: 40px;
+    line-height: 1.1;
+}
+
+.saldo-movimentos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    margin-top: 22px;
+}
+
+.saldo-movimentos small {
+    font-size: 13px;
+    opacity: 0.90;
+}
+
+.resumo-dashboard {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.resumo-card {
+    padding: 20px;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 9px 22px rgba(15, 23, 42, 0.06);
+}
+
+.resumo-card span {
+    display: block;
+    margin-bottom: 12px;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.resumo-card strong {
+    display: block;
+    color: #0f172a;
+    font-size: 22px;
+}
+
+.resumo-card.entrada {
+    border-left: 5px solid #10b981;
+}
+
+.resumo-card.saida {
+    border-left: 5px solid #ef4444;
+}
+
+.resumo-card.mensalidade {
+    border-left: 5px solid #2563eb;
+}
+
+.resumo-card.inicial {
+    border-left: 5px solid #7c3aed;
+}
+
+.acoes-dashboard {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.acao-rapida {
+    min-height: 72px;
+    padding: 14px;
+    border: 0;
+    border-radius: 18px;
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.acao-rapida span {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 21px;
+}
+
+.acao-rapida.entrada {
+    background: #10b981;
+}
+
+.acao-rapida.saida {
+    background: #ef4444;
+}
+
+.acao-rapida.mensalidade {
+    background: #2563eb;
+}
+
+.acao-rapida.recorrencia {
+    background: #7c3aed;
+}
+
+.composicao-lista {
+    display: grid;
+    gap: 0;
+}
+
+.composicao-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+
+    padding: 14px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.composicao-item:last-child {
+    border-bottom: 0;
+}
+
+.composicao-item span {
+    color: #475569;
+}
+
+.composicao-item strong {
+    color: #15803d;
+    white-space: nowrap;
+}
+
+.composicao-item.saida strong {
+    color: #dc2626;
+}
+
+.titulo-lancamentos h2 {
+    margin-bottom: 3px;
+}
+
+.titulo-lancamentos p {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.lista-lancamentos-mobile {
+    display: grid;
+    margin-top: 12px;
+}
+
+.lancamento-mobile {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.lancamento-mobile:last-child {
+    border-bottom: 0;
+}
+
+.icone-lancamento {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.icone-lancamento.entrada {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.icone-lancamento.saida {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.icone-lancamento.mensalidade {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.dados-lancamento {
+    min-width: 0;
+}
+
+.dados-lancamento strong {
+    display: block;
+    overflow: hidden;
+    color: #0f172a;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dados-lancamento span {
+    display: block;
+    margin-top: 4px;
+    color: #64748b;
+    font-size: 12px;
+}
+
+.valor-lancamento {
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.valor-lancamento.entrada,
+.valor-lancamento.mensalidade {
+    color: #15803d;
+}
+
+.valor-lancamento.saida {
+    color: #dc2626;
+}
+
+/* AJUSTES APENAS NO CELULAR */
+
+@media (max-width: 768px) {
+
+    .dashboard-v2 {
+        gap: 13px;
+    }
+
+    .saldo-destaque {
+        padding: 22px 20px;
+        border-radius: 22px;
+    }
+
+    .saldo-destaque > strong {
+        font-size: 33px;
+        word-break: break-word;
+    }
+
+    .saldo-movimentos {
+        display: grid;
+        gap: 5px;
+        margin-top: 17px;
+    }
+
+    .resumo-dashboard {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .resumo-card {
+        min-height: 105px;
+        padding: 15px;
+        border-radius: 17px;
+    }
+
+    .resumo-card span {
+        font-size: 12px;
+    }
+
+    .resumo-card strong {
+        font-size: 18px;
+        word-break: break-word;
+    }
+
+    .acoes-dashboard {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .acao-rapida {
+        min-height: 72px;
+        padding: 10px 6px;
+        border-radius: 15px;
+        font-size: 12px;
+    }
+
+    .acao-rapida span {
+        font-size: 20px;
+    }
+
+    .composicao-dashboard,
+    .lancamentos-dashboard {
+        padding: 16px;
+    }
+
+    .composicao-item {
+        font-size: 13px;
+    }
+
+    .lancamento-mobile {
+        grid-template-columns: 40px minmax(0, 1fr);
+    }
+
+    .icone-lancamento {
+        width: 38px;
+        height: 38px;
+    }
+
+    .valor-lancamento {
+        grid-column: 2;
+        margin-top: -5px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .saldo-destaque > strong {
+        font-size: 28px;
+    }
+
+    .resumo-dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .acoes-dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .acao-rapida {
+        min-height: 54px;
+    }
+
+    .acao-rapida span {
+        display: inline;
+        margin-right: 6px;
+    }
+}
