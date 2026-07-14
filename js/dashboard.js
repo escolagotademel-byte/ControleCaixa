@@ -55,48 +55,43 @@ async function renderDashboard() {
         item => item.ativo !== false
     );
 
-    const entradasRecorrentesMes = recorrenciasAtivas
+    const entradasRecorrentes = recorrenciasAtivas
         .filter(item => item.tipo === "entrada")
         .reduce(
-            (soma, item) =>
-                soma + Number(item.valor || 0),
+            (soma, item) => soma + Number(item.valor || 0),
             0
         );
 
-    const saidasRecorrentesMes = recorrenciasAtivas
+    const saidasRecorrentes = recorrenciasAtivas
         .filter(item => item.tipo === "saida")
         .reduce(
-            (soma, item) =>
-                soma + Number(item.valor || 0),
+            (soma, item) => soma + Number(item.valor || 0),
             0
         );
 
     const totalMensalidadesPagas = mensalidadesPagasMes.reduce(
-        (soma, item) =>
-            soma + Number(item.valor || 0),
+        (soma, item) => soma + Number(item.valor || 0),
         0
     );
 
     const totalEntradasManuais = entradasMes.reduce(
-        (soma, item) =>
-            soma + Number(item.valor || 0),
+        (soma, item) => soma + Number(item.valor || 0),
         0
     );
 
     const totalSaidasManuais = saidasMes.reduce(
-        (soma, item) =>
-            soma + Number(item.valor || 0),
+        (soma, item) => soma + Number(item.valor || 0),
         0
     );
 
     const totalEntradas =
         totalEntradasManuais +
-        entradasRecorrentesMes +
+        entradasRecorrentes +
         totalMensalidadesPagas;
 
     const totalSaidas =
         totalSaidasManuais +
-        saidasRecorrentesMes;
+        saidasRecorrentes;
 
     const saldo =
         saldoInicial +
@@ -134,163 +129,113 @@ async function renderDashboard() {
         .slice(0, 10);
 
     document.getElementById("app").innerHTML = `
-        <section class="dashboard-v2">
+        <section class="dashboard-simples">
 
-            <div class="saldo-destaque ${
-                saldo < 0 ? "saldo-negativo" : ""
-            }">
-                <span>💰 Saldo atual</span>
+            <div class="resumo-dashboard-simples">
 
-                <strong>${moeda(saldo)}</strong>
-
-                <div class="saldo-movimentos">
-                    <small>
-                        ▲ ${moeda(totalEntradas)} em entradas
-                    </small>
-
-                    <small>
-                        ▼ ${moeda(totalSaidas)} em saídas
-                    </small>
+                <div class="resumo-card-simples saldo">
+                    <span>Saldo atual</span>
+                    <strong>${moeda(saldo)}</strong>
                 </div>
-            </div>
 
-            <div class="resumo-dashboard">
-
-                <div class="resumo-card entrada">
+                <div class="resumo-card-simples entrada">
                     <span>Entradas do mês</span>
                     <strong>${moeda(totalEntradas)}</strong>
                 </div>
 
-                <div class="resumo-card saida">
+                <div class="resumo-card-simples saida">
                     <span>Saídas do mês</span>
                     <strong>${moeda(totalSaidas)}</strong>
                 </div>
 
-                <div class="resumo-card mensalidade">
+                <div class="resumo-card-simples mensalidade">
                     <span>Mensalidades pagas</span>
                     <strong>${moeda(totalMensalidadesPagas)}</strong>
                 </div>
 
-                <div class="resumo-card inicial">
-                    <span>Saldo inicial</span>
-                    <strong>${moeda(saldoInicial)}</strong>
-                </div>
-
             </div>
 
-            <div class="acoes-dashboard">
+            <div class="acoes-dashboard-simples">
 
                 <button
                     type="button"
-                    class="acao-rapida entrada"
+                    class="acao-dashboard entrada"
                     onclick="navegar('entradas')"
                 >
-                    <span>➕</span>
-                    Nova entrada
+                    ➕ Nova entrada
                 </button>
 
                 <button
                     type="button"
-                    class="acao-rapida saida"
+                    class="acao-dashboard saida"
                     onclick="navegar('saidas')"
                 >
-                    <span>➖</span>
-                    Nova saída
+                    ➖ Nova saída
                 </button>
 
                 <button
                     type="button"
-                    class="acao-rapida mensalidade"
+                    class="acao-dashboard mensalidade"
                     onclick="navegar('mensalidades')"
                 >
-                    <span>🎓</span>
-                    Mensalidades
+                    🎓 Mensalidades
                 </button>
 
                 <button
                     type="button"
-                    class="acao-rapida recorrencia"
+                    class="acao-dashboard recorrencia"
                     onclick="navegar('recorrencias')"
                 >
-                    <span>🔄</span>
-                    Recorrências
+                    🔄 Recorrências
                 </button>
 
             </div>
 
-            <div class="painel composicao-dashboard">
-
+            <div class="painel">
                 <h2>Resumo do mês</h2>
 
-                <div class="composicao-lista">
+                <div class="resumo-linhas">
 
-                    <div class="composicao-item">
+                    <div>
                         <span>Entradas manuais</span>
-                        <strong>
-                            ${moeda(totalEntradasManuais)}
-                        </strong>
+                        <strong>${moeda(totalEntradasManuais)}</strong>
                     </div>
 
-                    <div class="composicao-item">
+                    <div>
                         <span>Entradas recorrentes</span>
-                        <strong>
-                            ${moeda(entradasRecorrentesMes)}
-                        </strong>
+                        <strong>${moeda(entradasRecorrentes)}</strong>
                     </div>
 
-                    <div class="composicao-item">
+                    <div>
                         <span>Mensalidades pagas</span>
-                        <strong>
-                            ${moeda(totalMensalidadesPagas)}
-                        </strong>
+                        <strong>${moeda(totalMensalidadesPagas)}</strong>
                     </div>
 
-                    <div class="composicao-item saida">
+                    <div class="saida">
                         <span>Saídas manuais</span>
-                        <strong>
-                            ${moeda(totalSaidasManuais)}
-                        </strong>
+                        <strong>${moeda(totalSaidasManuais)}</strong>
                     </div>
 
-                    <div class="composicao-item saida">
+                    <div class="saida">
                         <span>Saídas recorrentes</span>
-                        <strong>
-                            ${moeda(saidasRecorrentesMes)}
-                        </strong>
+                        <strong>${moeda(saidasRecorrentes)}</strong>
                     </div>
 
                 </div>
-
             </div>
 
-            <div class="painel lancamentos-dashboard">
-
-                <div class="titulo-lancamentos">
-                    <h2>Últimos lançamentos</h2>
-                    <p>Movimentações realizadas no mês atual</p>
-                </div>
+            <div class="painel">
+                <h2>Últimos lançamentos</h2>
 
                 ${
                     ultimosLancamentos.length
                         ? `
-                            <div class="lista-lancamentos-mobile">
+                            <div class="lista-lancamentos-simples">
 
                                 ${ultimosLancamentos.map(item => `
-                                    <div class="lancamento-mobile">
+                                    <div class="lancamento-simples">
 
-                                        <div class="icone-lancamento ${
-                                            item.tipo
-                                        }">
-                                            ${
-                                                item.tipo === "entrada"
-                                                    ? "↑"
-                                                    : item.tipo === "saida"
-                                                        ? "↓"
-                                                        : "🎓"
-                                            }
-                                        </div>
-
-                                        <div class="dados-lancamento">
+                                        <div>
                                             <strong>
                                                 ${escapeHtml(item.descricao)}
                                             </strong>
@@ -302,7 +247,7 @@ async function renderDashboard() {
                                             </span>
                                         </div>
 
-                                        <strong class="valor-lancamento ${
+                                        <strong class="valor ${
                                             item.tipo
                                         }">
                                             ${
@@ -324,7 +269,6 @@ async function renderDashboard() {
                             </p>
                         `
                 }
-
             </div>
 
         </section>
