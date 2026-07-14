@@ -162,7 +162,8 @@ async function renderDashboard() {
                     class="acao-dashboard entrada"
                     onclick="navegar('entradas')"
                 >
-                    ➕ Nova entrada
+                    <span>➕</span>
+                    Nova entrada
                 </button>
 
                 <button
@@ -170,7 +171,8 @@ async function renderDashboard() {
                     class="acao-dashboard saida"
                     onclick="navegar('saidas')"
                 >
-                    ➖ Nova saída
+                    <span>➖</span>
+                    Nova saída
                 </button>
 
                 <button
@@ -178,7 +180,8 @@ async function renderDashboard() {
                     class="acao-dashboard mensalidade"
                     onclick="navegar('mensalidades')"
                 >
-                    🎓 Mensalidades
+                    <span>🎓</span>
+                    Mensalidades
                 </button>
 
                 <button
@@ -186,7 +189,8 @@ async function renderDashboard() {
                     class="acao-dashboard recorrencia"
                     onclick="navegar('recorrencias')"
                 >
-                    🔄 Recorrências
+                    <span>🔄</span>
+                    Recorrências
                 </button>
 
             </div>
@@ -235,7 +239,19 @@ async function renderDashboard() {
                                 ${ultimosLancamentos.map(item => `
                                     <div class="lancamento-simples">
 
-                                        <div>
+                                        <div class="icone-lancamento ${
+                                            item.tipo
+                                        }">
+                                            ${
+                                                item.tipo === "entrada"
+                                                    ? "↑"
+                                                    : item.tipo === "saida"
+                                                        ? "↓"
+                                                        : "🎓"
+                                            }
+                                        </div>
+
+                                        <div class="dados-lancamento">
                                             <strong>
                                                 ${escapeHtml(item.descricao)}
                                             </strong>
@@ -247,7 +263,7 @@ async function renderDashboard() {
                                             </span>
                                         </div>
 
-                                        <strong class="valor ${
+                                        <strong class="valor-lancamento ${
                                             item.tipo
                                         }">
                                             ${
