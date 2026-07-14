@@ -1589,3 +1589,108 @@
         grid-template-columns: 1fr;
     }
 }
+/* ==================================================
+   AJUSTE VISUAL FINAL — CARDS E BOTÕES DO DASHBOARD
+================================================== */
+
+/* CARDS DOS VALORES */
+
+.resumo-card-simples {
+    border: none !important;
+    border-left: none !important;
+    border-radius: 22px !important;
+
+    box-shadow:
+        0 6px 18px rgba(15, 23, 42, 0.08) !important;
+}
+
+.resumo-card-simples.saldo {
+    background:
+        linear-gradient(135deg, #10b981, #059669) !important;
+}
+
+.resumo-card-simples.entrada {
+    background:
+        linear-gradient(135deg, #06b6d4, #0284c7) !important;
+}
+
+.resumo-card-simples.saida {
+    background:
+        linear-gradient(135deg, #fb923c, #f97316) !important;
+}
+
+.resumo-card-simples.mensalidade {
+    background:
+        linear-gradient(135deg, #3b82f6, #2563eb) !important;
+}
+
+/* BOTÕES DE AÇÃO */
+
+.acao-dashboard {
+    min-width: 0;
+    min-height: 58px;
+
+    padding: 12px 14px;
+
+    background: #ffffff !important;
+    color: #334155 !important;
+
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 15px !important;
+
+    box-shadow:
+        0 8px 18px rgba(15, 23, 42, 0.06) !important;
+
+    font-weight: 700;
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.acao-dashboard span {
+    margin-right: 6px;
+}
+
+.acao-dashboard.entrada {
+    border-left: 5px solid #10b981 !important;
+}
+
+.acao-dashboard.saida {
+    border-left: 5px solid #ef4444 !important;
+}
+
+.acao-dashboard.mensalidade {
+    border-left: 5px solid #2563eb !important;
+}
+
+.acao-dashboard.recorrencia {
+    border-left: 5px solid #7c3aed !important;
+}
+
+.acao-dashboard:hover {
+    background: #f8fafc !important;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 22px rgba(15, 23, 42, 0.09) !important;
+}
+
+/* AJUSTE NO CELULAR */
+
+@media (max-width: 768px) {
+
+    .resumo-card-simples {
+        border-radius: 18px !important;
+    }
+
+    .acao-dashboard {
+        min-height: 58px;
+        padding: 10px 8px;
+
+        font-size: 12px;
+    }
+}
